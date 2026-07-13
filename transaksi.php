@@ -1,4 +1,3 @@
-<!-- transaksi.php -->
 <?php
 include 'koneksi.php';
 ?>
@@ -6,87 +5,241 @@ include 'koneksi.php';
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Transaksi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Data Transaksi</title>
 
-    <style>
-        body {
-            background-color: #f5f5f5;
-        }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-        .container {
-            margin-top: 40px;
-        }
+<style>
 
-        .table {
-            background: white;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-        h1 {
-            font-weight: bold;
-        }
-    </style>
+body{
+    background:linear-gradient(135deg,#0f172a,#111827,#1e293b);
+    min-height:100vh;
+}
+
+.container{
+    margin-top:40px;
+}
+
+.card{
+    background:#1e293b;
+    border:1px solid #334155;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,.45);
+    color:white;
+}
+
+.card-header{
+    background:#0f172a;
+    border-bottom:1px solid #334155;
+    padding:20px 30px;
+}
+
+.card-header h2{
+    margin:0;
+    font-weight:bold;
+}
+
+.card-body{
+    padding:30px;
+}
+
+.table{
+    color:white;
+    margin-bottom:0;
+}
+
+.table thead{
+    background:#0f172a;
+}
+
+.table thead th{
+    color:#22c55e;
+    border-color:#334155;
+    text-align:center;
+}
+
+.table td{
+    border-color:#334155;
+    text-align:center;
+    vertical-align:middle;
+}
+
+.table tbody tr:hover{
+    background:#293548;
+}
+
+.btn{
+    border-radius:10px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-primary{
+    background:#16a34a;
+    border:none;
+}
+
+.btn-primary:hover{
+    background:#15803d;
+}
+
+.btn-dark{
+    background:#475569;
+    border:none;
+}
+
+.btn-dark:hover{
+    background:#334155;
+}
+
+.btn-danger{
+    border:none;
+}
+
+</style>
+
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1 class="mb-3">Data Transaksi</h1>
+<div class="card">
 
-    <a href="tambah_transaksi.php" class="btn btn-primary mb-3">
-        + Tambah Transaksi
-    </a>
+<div class="card-header d-flex justify-content-between align-items-center flex-wrap">
 
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Total</th>
-                <th>Diskon</th>
-                <th>Total Bayar</th>
-                <th>Uang Bayar</th>
-                <th>Kembalian</th>
-                <th width="120">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
+<h2>
+<i class="bi bi-cart-check-fill text-success"></i>
+Data Transaksi
+</h2>
 
-        <?php
-        $no = 1;
+<div class="mt-2">
 
-        // Memastikan nama variabel koneksi database benar ($conn)
-        $query = mysqli_query($conn, "SELECT * FROM transaksi ORDER BY id_transaksi DESC");
+<a href="dashboard.php" class="btn btn-dark">
+<i class="bi bi-house-door-fill"></i>
+Dashboard
+</a>
 
-        while($data = mysqli_fetch_array($query)){
-        ?>
+<a href="produk.php" class="btn btn-info text-white">
+<i class="bi bi-box-seam-fill"></i>
+Produk
+</a>
 
-            <tr>
-                <td><?= $no++; ?></td>
-                <td><?= $data['tanggal']; ?></td>
-                <td>Rp <?= number_format($data['total'], 0, ',', '.'); ?></td>
-                <td>Rp <?= number_format($data['diskon'], 0, ',', '.'); ?></td>
-                <td>Rp <?= number_format($data['total_bayar'], 0, ',', '.'); ?></td>
-                <td>Rp <?= number_format($data['uang_bayar'], 0, ',', '.'); ?></td>
-                <td>Rp <?= number_format($data['kembalian'], 0, ',', '.'); ?></td>
-                <td>
-                    <!-- Tombol Hapus menuju hapus_transaksi.php -->
-                    <a href="hapus_transaksi.php?id=<?= $data['id_transaksi']; ?>"
-                       class="btn btn-danger btn-sm"
-                       onclick="return confirm('Yakin ingin menghapus transaksi ini?')">
-                        Hapus
-                    </a>
-                </td>
-            </tr>
+<a href="tambah_transaksi.php" class="btn btn-primary">
+<i class="bi bi-plus-circle-fill"></i>
+Tambah Transaksi
+</a>
 
-        <?php } ?>
+<a href="logout.php" class="btn btn-danger">
+<i class="bi bi-box-arrow-right"></i>
+Logout
+</a>
 
-        </tbody>
-    </table>
+</div>
+
+</div>
+
+<div class="card-body">
+
+<div class="table-responsive">
+
+<table class="table table-hover align-middle">
+
+<thead>
+
+<tr>
+<th>No</th>
+<th>Tanggal</th>
+<th>Total</th>
+<th>Diskon</th>
+<th>Total Bayar</th>
+<th>Uang Bayar</th>
+<th>Kembalian</th>
+<th>Aksi</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<?php
+
+$no = 1;
+
+$query = mysqli_query($conn,"SELECT * FROM transaksi ORDER BY id_transaksi DESC");
+
+while($data = mysqli_fetch_array($query)){
+
+?>
+
+<tr>
+
+<td><?= $no++; ?></td>
+
+<td><?= $data['tanggal']; ?></td>
+
+<td>
+Rp <?= number_format($data['total'],0,',','.'); ?>
+</td>
+
+<td>
+Rp <?= number_format($data['diskon'],0,',','.'); ?>
+</td>
+
+<td>
+Rp <?= number_format($data['total_bayar'],0,',','.'); ?>
+</td>
+
+<td>
+Rp <?= number_format($data['uang_bayar'],0,',','.'); ?>
+</td>
+
+<td>
+Rp <?= number_format($data['kembalian'],0,',','.'); ?>
+</td>
+
+<td>
+
+<a href="hapus_transaksi.php?id=<?= $data['id_transaksi']; ?>"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Yakin ingin menghapus transaksi ini?')">
+
+<i class="bi bi-trash-fill"></i>
+Hapus
+
+</a>
+
+</td>
+
+</tr>
+
+<?php } ?>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </body>
