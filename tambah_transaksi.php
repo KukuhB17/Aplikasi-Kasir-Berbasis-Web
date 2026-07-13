@@ -138,12 +138,22 @@ $produk = mysqli_query($conn,
 <title>Tambah Transaksi</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+body{background:linear-gradient(135deg,#0f172a,#111827,#1e293b);color:#fff}
+.container{max-width:1100px}
+.cardx{background:#1e293b;border:1px solid #334155;border-radius:20px;padding:30px;box-shadow:0 20px 40px rgba(0,0,0,.4);margin:40px auto}
+.form-control,.form-select,select{background:#0f172a!important;color:#fff!important;border:1px solid #334155}
+.table{color:#fff}.table td,.table th{border-color:#334155}.table-dark th{background:#0f172a}
+.btn{border-radius:10px}
+.summary{background:#0f172a;border:1px solid #334155;border-radius:15px;padding:15px;margin-top:20px}
+</style>
 
 </head>
 
 <body>
 
-<div class="container mt-5">
+<div class="container"><div class="cardx">
 
 <h2>Tambah Transaksi</h2>
 
@@ -310,5 +320,5 @@ class="btn btn-success">
 
 </div>
 
-</body>
+</div></body>
 </html>
