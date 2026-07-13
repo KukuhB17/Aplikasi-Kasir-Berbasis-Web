@@ -8,40 +8,132 @@ $data = mysqli_query($conn,"SELECT * FROM produk");
 
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Data Produk</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
 body{
-    background:#f5f6fa;
+    background:linear-gradient(135deg,#0f172a,#111827,#1e293b);
+    min-height:100vh;
+}
+
+.container{
+    margin-top:40px;
 }
 
 .card{
-    border:none;
-    border-radius:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    background:#1e293b;
+    border:1px solid #334155;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
+    color:white;
+}
+
+.card-header{
+    background:#0f172a;
+    border-bottom:1px solid #334155;
+    padding:20px 30px;
+}
+
+.card-header h2{
+    margin:0;
+    font-weight:700;
+    color:white;
+}
+
+.card-body{
+    padding:30px;
 }
 
 .table{
-    border-radius:10px;
-    overflow:hidden;
+    color:white;
+    margin-bottom:0;
 }
 
-h2{
-    font-weight:bold;
+.table thead{
+    background:#0f172a;
+}
+
+.table thead th{
+    color:#38bdf8;
+    border-color:#334155;
+    text-align:center;
+}
+
+.table td{
+    border-color:#334155;
+    vertical-align:middle;
+    text-align:center;
+}
+
+.table tbody tr:hover{
+    background:#293548;
+}
+
+.badge{
+    font-size:14px;
+    padding:8px 12px;
 }
 
 .btn{
     border-radius:10px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-dark{
+    background:#475569;
+    border:none;
+}
+
+.btn-dark:hover{
+    background:#334155;
+}
+
+.btn-primary{
+    background:#2563eb;
+    border:none;
+}
+
+.btn-primary:hover{
+    background:#1d4ed8;
+}
+
+.btn-success{
+    background:#16a34a;
+    border:none;
+}
+
+.btn-success:hover{
+    background:#15803d;
+}
+
+.btn-warning{
+    border:none;
+    color:white;
+}
+
+.btn-danger{
+    border:none;
 }
 
 </style>
@@ -50,53 +142,50 @@ h2{
 
 <body>
 
-<div class="container mt-5">
+<div class="container">
 
-<div class="card p-4">
+<div class="card">
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="card-header d-flex justify-content-between align-items-center flex-wrap">
 
-<h2>📦 Data Produk</h2>
+<h2>
+<i class="bi bi-box-seam-fill text-info"></i>
+Data Produk
+</h2>
 
-<div>
+<div class="mt-2">
 
-<a href="dashboard.php"
-class="btn btn-dark">
-
-🏠 Dashboard
-
+<a href="dashboard.php" class="btn btn-dark">
+<i class="bi bi-house-door-fill"></i>
+Dashboard
 </a>
 
-<a href="transaksi.php"
-class="btn btn-success">
-
-💰 Transaksi
-
+<a href="transaksi.php" class="btn btn-success">
+<i class="bi bi-cart-check-fill"></i>
+Transaksi
 </a>
 
-<a href="tambah_produk.php"
-class="btn btn-primary">
-
-➕ Tambah Produk
-
+<a href="tambah_produk.php" class="btn btn-primary">
+<i class="bi bi-plus-circle-fill"></i>
+Tambah Produk
 </a>
 
-<a href="logout.php"
-class="btn btn-danger">
-
-🚪 Logout
-
+<a href="logout.php" class="btn btn-danger">
+<i class="bi bi-box-arrow-right"></i>
+Logout
 </a>
 
 </div>
 
 </div>
+
+<div class="card-body">
 
 <div class="table-responsive">
 
-<table class="table table-bordered table-hover align-middle text-center">
+<table class="table table-hover align-middle">
 
-<thead class="table-dark">
+<thead>
 
 <tr>
 
@@ -130,12 +219,12 @@ while($d = mysqli_fetch_array($data)){
 <td><?= $d['nama_produk']; ?></td>
 
 <td>
-Rp <?= number_format($d['harga']); ?>
+Rp <?= number_format($d['harga'],0,',','.'); ?>
 </td>
 
 <td>
 
-<span class="badge bg-primary p-2">
+<span class="badge bg-info">
 
 <?= $d['stok']; ?>
 
@@ -145,18 +234,21 @@ Rp <?= number_format($d['harga']); ?>
 
 <td>
 
-<a href="edit_produk.php?id=<?= $d['id_produk']; ?>"
-class="btn btn-warning btn-sm">
+<a href="edit_produk.php?id=<?= $d['id_produk']; ?>" class="btn btn-warning btn-sm">
 
-✏ Edit
+<i class="bi bi-pencil-square"></i>
+
+Edit
 
 </a>
 
 <a href="hapus_produk.php?id=<?= $d['id_produk']; ?>"
 class="btn btn-danger btn-sm"
-onclick="return confirm('Yakin hapus produk?')">
+onclick="return confirm('Yakin ingin menghapus produk ini?')">
 
-🗑 Hapus
+<i class="bi bi-trash-fill"></i>
+
+Hapus
 
 </a>
 
@@ -169,6 +261,8 @@ onclick="return confirm('Yakin hapus produk?')">
 </tbody>
 
 </table>
+
+</div>
 
 </div>
 
